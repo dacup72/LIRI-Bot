@@ -6,7 +6,7 @@ var input2 = process.argv[3];
 
 switch (input1) {
   case "my-tweets":
-    // twitter.twitter();
+    twitter();
     console.log(twitter);
     break;
   case "movie-this":

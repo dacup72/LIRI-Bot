@@ -1,8 +1,9 @@
 //needs exports
 
-function twitter() {
+
+module.exports = function twitter() {
   var twitter = require('twitter');
-  var keys = require('./keys.js');
+  var keys = require('../keys.js');
   var client = new twitter(keys.twitterKeys);
   var params = {screen_name: 'Dylan Acup'};
 
