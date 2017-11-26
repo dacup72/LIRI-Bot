@@ -1,8 +1,8 @@
 // console.log('this is loaded');
 
 exports.twitterKeys = {
-  consumer_key: '3qKIblNB8oVKaeWrMjYXagfrx',
-  consumer_secret: 'FIET4L22dJQjtTduberqPhJL4qBmYg7VxiTo8TwmUjg4IBdFaQ',
-  access_token_key: '504990437-j135rT6XjX7cbq7IIQ7QQJEG8QLNeu9iJnC5a4sL',
-  access_token_secret: 'oo2zB5bnV07bm6QsMxAGCuLTvbSxyglzlahU32YJyixJO',
+  twitter_consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  twitter_consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  twitter_access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  twitter_access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 }
