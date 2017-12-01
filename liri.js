@@ -1,5 +1,12 @@
 
 require('dotenv').config();
+var keys = require("./keys");
+
+var Twitter = require("twitter");
+var Spotify = require("node-spotify-api");
+var request = require("request");
+var fs = require("fs");
+
 
 
 // var twitter = require("./source/twitter.js");
@@ -26,7 +33,7 @@ switch (input1) {
 
 //==============FUNCTIONS==================
 
-
+var spotify = new Spotify(keys.spotify);
 function spotify() {
   var spotify = require('spotify');
 
