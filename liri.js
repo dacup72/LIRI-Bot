@@ -33,6 +33,21 @@ switch (input1) {
 
 //==============FUNCTIONS==================
 
+// Writes to the log.txt file
+var writeToLog = function(data) {
+  fs.appendFile("log.txt", JSON.stringify(data) + "\n", function(err) {
+    if (err) {
+      return console.log(err);
+    }
+
+    console.log("log.txt was updated!");
+  });
+};
+
+
+
+
+
 var spotify = new Spotify(keys.spotify);
 function spotify() {
   var spotify = require('spotify');
