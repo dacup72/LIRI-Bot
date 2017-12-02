@@ -7,28 +7,12 @@ var Spotify = require("node-spotify-api");
 var request = require("request");
 var fs = require("fs");
 
+// console.log(keys);
 
-
-// var twitter = require("./source/twitter.js");
 
 var userInput = process.argv;
 
 
-// DECIDER
-switch (userInput[2]) {
-  case "my-tweets":
-    twitter();
-    break;
-  case "movie-this":
-    movies();
-    break;
-  case "spotify-this-song":
-    getSpotify();
-    break;
-  case "do-what-it-says":
-    doIt();
-    break;
-}
 
 
 //==============FUNCTIONS==================
@@ -115,6 +99,18 @@ function movies() {
 
 
 
-function doIt() {
-
+// DECIDER
+switch (userInput[2]) {
+  case "my-tweets":
+    twitter();
+    break;
+  case "movie-this":
+    movies();
+    break;
+  case "spotify-this-song":
+    getSpotify(userInput[3]);
+    break;
+  case "do-what-it-says":
+    doIt();
+    break;
 }
