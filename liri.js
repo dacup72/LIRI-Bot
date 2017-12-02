@@ -7,17 +7,9 @@ var Spotify = require("node-spotify-api");
 var request = require("request");
 var fs = require("fs");
 
-// console.log(keys);
 
 
-var userInput = process.argv;
-
-
-
-
-//==============FUNCTIONS==================
-
-// Writes to the log.txt file
+// Writes data to the log.txt file
 var writeToLog = function (data) {
   fs.appendFile("log.txt", JSON.stringify(data) + "\n", function (err) {
     if (err) {
@@ -73,21 +65,40 @@ var getSpotify = function (songName) {
 };
 
 
-function twitter() {
-  var twitter = require('twitter');
-  var keys = require('./keys.js');
-  var client = new twitter(keys.twitterKeys);
-  var params = { screen_name: 'Dylan Acup' };
 
-  client.get('statuses/user_timeline', params, function (error, tweets, response) {
+// TWITTER
+var getTweets = function (input) {
+  var client = new Twitter(keys.twitter);
+
+  var screenName;
+  !input ? screenName = "realDonaldTrump" : screenName = input;
+
+  var params = { screen_name: screenName };
+
+  client.get("statuses/user_timeline", params, function (error, tweets, response) {
     if (!error) {
-      for (var i = 0; i < tweets.length && i < 20; i++) {
-        console.log(tweets[i].text);
-        console.log("--------------------");
+      var data = [];
+      // console.log(JSON.stringify(tweets[0].created_at, null, 2));
+
+      console.log(`\n===== Tweets for @${screenName} =====`)
+
+      for (var i = 0; i < 20; i++) {
+        data.push({
+          created_at: tweets[i].created_at,
+          text: tweets[i].text
+        });
+
+        console.log(`
+        \nTweet ${i + 1}.
+        \n- Created_at: ${tweets[i].created_at}
+        \n- Text: ${tweets[i].text}
+      `);
       }
+
+      writeToLog(data);
     }
   });
-}
+};
 
 
 function movies() {
@@ -105,11 +116,12 @@ function movies() {
 }
 
 
+var userInput = process.argv;
 
-// DECIDER
+// SWITCHER
 switch (userInput[2]) {
   case "my-tweets":
-    twitter();
+    getTweets(userInput[3]);
     break;
   case "movie-this":
     movies();
