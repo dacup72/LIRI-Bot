@@ -58,9 +58,16 @@ var getSpotify = function (songName) {
         "preview song: ": songs[i].preview_url,
         "album: ": songs[i].album.name
       });
+
+      console.log(`
+        \nSong ${i + 1}.
+        \n- Artist(s): ${songs[i].artists.map(getArtistNames)}
+        \n- Album: ${songs[i].album.name}
+        \n- Song Name: ${songs[i].name}
+        \n- Preview Song Here: ${songs[i].preview_url}
+      `)
     }
 
-    console.log(data);
     writeToLog(data);
   });
 };
