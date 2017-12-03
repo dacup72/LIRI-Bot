@@ -70,7 +70,7 @@ var getSpotify = function (songName) {
 var getTweets = function (screenName) {
   var client = new Twitter(keys.twitter);
 
-  if(!screenName) {
+  if (!screenName) {
     screenName = "realDonaldTrump";
   }
 
@@ -103,14 +103,14 @@ var getTweets = function (screenName) {
 
 
 // OMDB
-var getMovie = function(movieName) {
+var getMovie = function (movieName) {
   if (!movieName) {
     movieName = "Mr Nobody";
   }
 
   var urlHit = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=full&tomatoes=true&apikey=trilogy";
 
-  request(urlHit, function(error, response, body) {
+  request(urlHit, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       var jsonData = JSON.parse(body);
 
@@ -134,7 +134,7 @@ var getMovie = function(movieName) {
 
 
 // DO WHAT IT SAYS (random.txt)
-var doIt = function() {
+var doIt = function () {
 
 }
 
