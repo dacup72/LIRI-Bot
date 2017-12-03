@@ -30,7 +30,7 @@ var getArtistNames = function (artist) {
 };
 
 var getSpotify = function (songName) {
-  if (songName === undefined) {
+  if (!songName) {
     songName = "What's my age again";
   }
 
@@ -67,11 +67,12 @@ var getSpotify = function (songName) {
 
 
 // TWITTER
-var getTweets = function (input) {
+var getTweets = function (screenName) {
   var client = new Twitter(keys.twitter);
 
-  var screenName;
-  !input ? screenName = "realDonaldTrump" : screenName = input;
+  if(!screenName) {
+    screenName = "realDonaldTrump";
+  }
 
   var params = { screen_name: screenName };
 
@@ -101,21 +102,44 @@ var getTweets = function (input) {
 };
 
 
-function movies() {
-  var imdb = require('imdb-api');
-
-  function getId(movieId) {
-    imdb.search({
-      title: 'Toxic Avenger'
-    }, {
-        apiKey: '40e9cece'
-      }).then(console.log).catch(console.log);
-    return (SearchResult.imdbid);
+// OMDB
+var getMovie = function(movieName) {
+  if (!movieName) {
+    movieName = "Mr Nobody";
   }
-  imdb.getReq({ id: 'movieId', opts: { apiKey: '40e9cece' } }).then(console.log)
+
+  var urlHit = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=full&tomatoes=true&apikey=trilogy";
+
+  request(urlHit, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      var jsonData = JSON.parse(body);
+
+      var data = {
+        "Title:": jsonData.Title,
+        "Year:": jsonData.Year,
+        "Rated:": jsonData.Rated,
+        "IMDB Rating:": jsonData.imdbRating,
+        "Country:": jsonData.Country,
+        "Language:": jsonData.Language,
+        "Plot:": jsonData.Plot,
+        "Actors:": jsonData.Actors,
+        "Rotten Tomatoes Rating:": jsonData.Ratings[1].Value
+      };
+
+      console.log(data);
+      writeToLog(data);
+    }
+  });
+};
+
+
+// DO WHAT IT SAYS (random.txt)
+var doIt = function() {
+
 }
 
 
+// USERINPUT
 var userInput = process.argv;
 
 // SWITCHER
@@ -124,7 +148,7 @@ switch (userInput[2]) {
     getTweets(userInput[3]);
     break;
   case "movie-this":
-    movies();
+    getMovie(userInput[3]);
     break;
   case "spotify-this-song":
     getSpotify(userInput[3]);
@@ -132,4 +156,13 @@ switch (userInput[2]) {
   case "do-what-it-says":
     doIt();
     break;
+  default:
+    console.log(`
+      \n========== Please Enter Valid Input ==========
+      \n  $ node liri.js my-tweets "YOUR_SCREEN_NAME"
+      \n  $ node liri.js movie-this "YOUR_MOVIE_TITLE"
+      \n  $ node liri.js spotify-this-song "YOUR_SONG_NAME"
+      \n  $ node liri.js do-what-it-says
+      \n==============================================
+    `)
 }
