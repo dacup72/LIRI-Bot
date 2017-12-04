@@ -43,6 +43,8 @@ var getSpotify = function (songName) {
     var songs = data.tracks.items;
     var data = [];
 
+    console.log(`\n========== Song Search Results for "${songName}" ==========`);
+
     for (var i = 0; i < songs.length; i++) {
       data.push({
         "artist(s)": songs[i].artists.map(getArtistNames),
@@ -81,7 +83,7 @@ var getTweets = function (screenName) {
       var data = [];
       // console.log(JSON.stringify(tweets[0].created_at, null, 2));
 
-      console.log(`\n===== Tweets for @${screenName} =====`)
+      console.log(`\n========== Tweets for @${screenName} ==========`)
 
       for (var i = 0; i < 20; i++) {
         data.push({
@@ -126,7 +128,19 @@ var getMovie = function (movieName) {
         "Rotten Tomatoes Rating:": jsonData.Ratings[1].Value
       };
 
-      console.log(data);
+      console.log(`
+        \n========== Movie Search Results for "${movieName}" ==========
+        \n- Title: ${jsonData.Title} 
+        \n- Year: ${jsonData.Year} 
+        \n- Rated: ${jsonData.Rated} 
+        \n- IMDB Rating: ${jsonData.imdbRating} 
+        \n- Country: ${jsonData.Country} 
+        \n- Language: ${jsonData.Language} 
+        \n- Plot: ${jsonData.Plot} 
+        \n- Actors: ${jsonData.Actors} 
+        \n- Rotten Tomatoes Rating: ${jsonData.Ratings[1].Value} 
+      `);
+
       writeToLog(data);
     }
   });
