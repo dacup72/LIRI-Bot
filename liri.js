@@ -149,29 +149,43 @@ var getMovie = function (movieName) {
 
 // DO WHAT IT SAYS (random.txt)
 var doIt = function () {
+  fs.readFile("random.txt", "utf8", function (error, data) {
+    console.log(`\n========== random.txt Data ==========`);
+    console.log(`\n- ${JSON.stringify(data, null, 2)}`);
 
+    var dataArr = data.split(",");
+
+    if (dataArr.length === 2) {
+      decider([null, null, dataArr[0], dataArr[1]]);
+    }
+    else if (dataArr.length === 1) {
+      decider([null, null, dataArr[0]]);
+    }
+  });
 }
 
 
 // USERINPUT
 var userInput = process.argv;
+decider(userInput);
 
 // SWITCHER
-switch (userInput[2]) {
-  case "my-tweets":
-    getTweets(userInput[3]);
-    break;
-  case "movie-this":
-    getMovie(userInput[3]);
-    break;
-  case "spotify-this-song":
-    getSpotify(userInput[3]);
-    break;
-  case "do-what-it-says":
-    doIt();
-    break;
-  default:
-    console.log(`
+function decider(inputArray) {
+  switch (inputArray[2]) {
+    case "my-tweets":
+      getTweets(inputArray[3]);
+      break;
+    case "movie-this":
+      getMovie(inputArray[3]);
+      break;
+    case "spotify-this-song":
+      getSpotify(inputArray[3]);
+      break;
+    case "do-what-it-says":
+      doIt();
+      break;
+    default:
+      console.log(`
       \n========== Please Enter Valid Input ==========
       \n  $ node liri.js my-tweets "YOUR_SCREEN_NAME"
       \n  $ node liri.js movie-this "YOUR_MOVIE_TITLE"
@@ -179,4 +193,5 @@ switch (userInput[2]) {
       \n  $ node liri.js do-what-it-says
       \n==============================================
     `)
+  }
 }
