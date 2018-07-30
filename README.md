@@ -77,4 +77,4 @@ A step by step series of examples that tell you how to get a development env run
 
 ## Authors 
 
-* **Dylan Acup** - [Portfolio](dylanacup.com)
+* **Dylan Acup** - [Portfolio](https://www.dylanacup.com)
