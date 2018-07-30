@@ -1,6 +1,6 @@
 # LIRI Bot
 
-LIRI Bot is a Node.js based application allowing users to access different API's through the terminal / git bash window.  Users can do the following: enter a screen name into the "my-tweets" command to get access to specific tweets, enter a song title into the "spotify-this-song" command to search songs, enter a movie name into the "movie-this" command to search movies, or enter the command "do-what-it-says" to have the Node.js file system read a txt file and apply what every commmand is inside of theat files to the applications functionality.  The app makes use of the Spotify, Twitter, and OMDB APIs.
+LIRI Bot is a Node.js based application allowing users to access different API's through the terminal / git bash window.  Users can do the following: enter a screen name into the "my-tweets" command to get access to specific tweets, enter a song title into the "spotify-this-song" command to search songs, enter a movie name into the "movie-this" command to search movies, or enter the command "do-what-it-says" to have the Node.js file system read a txt file and apply what every commmand is inside of theat files to the applications functionality.  The app makes use of the Spotify, Twitter, and OMDB APIs along with the ability to log your previous search results in a .txt file with Node.js FS.
 
 ## Getting Started
 
